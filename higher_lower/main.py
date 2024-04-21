@@ -6,7 +6,6 @@
 import random
 from art import logo
 from art import vs
-from replit import clear
 from game_data import data
 
 print(logo)
@@ -28,7 +27,6 @@ def compare(a, b):
       elif a["follower_count"] < b["follower_count"]:
         print(f"Wrong, final score {score}")
         keep_going = False
-        clear()
     elif user_choice == "B":
       if b["follower_count"] > a["follower_count"]:
         score += 1
@@ -41,7 +39,6 @@ def compare(a, b):
       elif b["follower_count"] < a["follower_count"]:
         print(f"Wrong, final score {score}")
         keep_going = False
-        clear()
     else:
       print("Whoops, random didn't work for us.  Let's generate a new one.")
       a = random.choice(data)
