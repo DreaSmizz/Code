@@ -36,41 +36,35 @@ resources = {
     "milk": 200,
     "coffee": 100,
 }
-
-drink_choice = input(
-    "What would you like to drink? Type 'espresso', 'latte', 'cappuccino'.  Type 'report' to check "
-    "the resources on the machine.  If you are the machine maintainer, type the secret word to turn "
-    "the machine off. ")
+# Create smaller dictionary to read drink choice into
 
 
-turn_off = False
-
-
-def espresso():
-    espresso_water = MENU['espresso']['ingredients']['water']
-    espresso_coffee = MENU['espresso']['ingredients']['coffee']
-    espresso_cost = MENU['espresso']['cost']
-    return espresso_water, espresso_coffee, espresso_cost
-
-
-def latte():
-    latte_water = MENU['latte']['ingredients']['water']
-    latte_coffee = MENU['latte']['ingredients']['coffee']
-    latte_milk = MENU['latte']['ingredients']['milk']
-    latte_cost = MENU['latte']['cost']
-    return latte_water, latte_coffee, latte_milk, latte_cost
-
-
-def cappuccino():
-    cappuccino_water = MENU['cappuccino']['ingredients']['water']
-    cappuccino_coffee = MENU['cappuccino']['ingredients']['coffee']
-    cappuccino_milk = MENU['cappuccino']['ingredients']['milk']
-    cappuccino_cost = MENU['cappuccino']['cost']
-    return cappuccino_water, cappuccino_coffee, cappuccino_milk, cappuccino_cost
+def drink_choice():
+    drink = {}
+    drink = input(
+        "What would you like to drink? Type 'espresso', 'latte', 'cappuccino'.  Type 'report' to check "
+        "the resources on the machine.  If you are the machine maintainer, type the secret word to turn "
+        "the machine off. ")
+    if drink == 'espresso':
+        drink = dict(MENU['espresso'])
+    elif drink == 'latte':
+        drink = dict(MENU['latte'])
+    elif drink == 'cappuccino':
+        drink = dict(MENU['cappuccino'])
+    elif drink == 'report':
+        print(resources)
+    else:
+        print("Invalid input, no coffee for you!")
+    print(drink)
 
 
 def resource_sufficient():
-    breakpoint()
+    initial_water = resources['water']
+    initial_milk = resources['milk']
+    initial_coffee = resources['coffee']
+    remaining_water = resources['water']
+    remaining_milk = resources['milk']
+    remaining_coffee = resources['coffee']
 
 
 def process_coins():
@@ -103,12 +97,27 @@ def main():
         print("Invalid choice! No coffee for you!")
 
 
-main()
+drink_choice()
 
 
 
 
-
-
+#def espresso():
+#    espresso_water = MENU['espresso']['ingredients']['water']
+#    espresso_coffee = MENU['espresso']['ingredients']['coffee']
+#    espresso_cost = MENU['espresso']['cost']
+#    return espresso_water, espresso_coffee, espresso_cost
+#def latte():
+#    latte_water = MENU['latte']['ingredients']['water']
+#    latte_coffee = MENU['latte']['ingredients']['coffee']
+#    latte_milk = MENU['latte']['ingredients']['milk']
+#    latte_cost = MENU['latte']['cost']
+#    return latte_water, latte_coffee, latte_milk, latte_cost
+#    def cappuccino():
+#    cappuccino_water = MENU['cappuccino']['ingredients']['water']
+#    cappuccino_coffee = MENU['cappuccino']['ingredients']['coffee']
+#    cappuccino_milk = MENU['cappuccino']['ingredients']['milk']
+#    cappuccino_cost = MENU['cappuccino']['cost']
+#    return cappuccino_water, cappuccino_coffee, cappuccino_milk, cappuccino_cost
 
 
