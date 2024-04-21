@@ -6,6 +6,7 @@
 # TODO: 6. Check transaction successful?
 # TODO: 7. Make Coffee.
 import math
+
 MENU = {
     "espresso": {
         "ingredients": {
@@ -39,16 +40,8 @@ resources = {
 }
 # Create smaller dictionary to read drink choice into
 
-drink = {}
-make_coffee = True
 
-
-def resource_sufficient(user_input, resources, drink):
-    enough_resources = True
-    while enough_resources:
-        if resources['water'] < 0 or resources['coffee'] < 0 or resources['milk'] < 0:
-            print("Not enough water, contact coffee maintainer!")
-            enough_resources = False
+def resource_sufficient(user_input, drink):
     if user_input == 'espresso':
         resources['water'] = resources['water'] - drink['ingredients']['water']
         resources['coffee'] = resources['coffee'] - drink['ingredients']['coffee']
@@ -75,24 +68,27 @@ def process_coins(drink):
     else:
         print("You didn't put enough money in.  No coffee for you!")
 
+
 def main():
     make_coffee = True
     while make_coffee:
-        user_input = input(
-            "What would you like to drink? Type 'espresso', 'latte', 'cappuccino'.  Type 'report' to check "
-            "the resources on the machine.  If you are the machine maintainer, type the secret word to turn "
-            "the machine off. ")
+        user_input = input("What would you like to drink? Type 'espresso', 'latte', 'cappuccino'.  Type 'report' "
+                           "to check the resources on the machine.  If you are the machine maintainer, type the "
+                           "secret word to turn the machine off. ")
+        print(resources)
         if user_input == 'espresso':
             drink = dict(MENU['espresso'])
-            resource_sufficient(user_input, resources, drink)
+            #print(drink)
+            resource_sufficient(user_input, drink)
             process_coins(drink)
         elif user_input == 'latte':
             drink = dict(MENU['latte'])
-            resource_sufficient(user_input, resources, drink)
+            #print(drink)
+            resource_sufficient(user_input, drink)
             process_coins(drink)
         elif user_input == 'cappuccino':
             drink = dict(MENU['cappuccino'])
-            resource_sufficient(user_input, resources, drink)
+            resource_sufficient(user_input, drink)
             process_coins(drink)
         elif user_input == 'report':
             print(resources)
@@ -102,28 +98,8 @@ def main():
             print("Invalid input, no coffee for you!")
 
 
-
 if __name__ == '__main__':
     main()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #def espresso():
 #    espresso_water = MENU['espresso']['ingredients']['water']
@@ -157,5 +133,3 @@ if __name__ == '__main__':
 #    else:
 #        print("Invalid input, no coffee for you!")
 #    return drink
-
-
