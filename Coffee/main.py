@@ -41,15 +41,18 @@ resources = {
 # Create smaller dictionary to read drink choice into
 
 
-def resource_sufficient(user_input, drink):
-    if user_input == 'espresso':
-        resources['water'] = resources['water'] - drink['ingredients']['water']
-        resources['coffee'] = resources['coffee'] - drink['ingredients']['coffee']
-    else:
-        resources['water'] = resources['water'] - drink['ingredients']['water']
-        resources['milk'] = resources['milk'] - drink['ingredients']['milk']
-        resources['coffee'] = resources['coffee'] - drink['ingredients']['coffee']
-    return resources
+def resource_sufficient(drink):
+    #Before we make the drink, let's add a check that validates we have enough
+    #as we passed drink ingredients as key, pair values So let's use that. 
+    for item in drink.keys():
+        if drink[item] > resources[item]:
+            return False
+
+    #We have enough to make the item
+    for item in drink.keys():
+        resources[item] = resources[item] - drink[item]
+
+    return True
 
 
 def process_coins(drink):
@@ -57,79 +60,50 @@ def process_coins(drink):
     nickel = .05
     dime = .10
     quarter = .25
-    penny_count = float(input("Please enter number of pennies: ")) * penny
-    nickel_count = float(input("Please enter number of nickels: ")) * nickel
-    dime_count = float(input("Please enter number of dimes: ")) * dime
-    quarter_count = float(input("Please enter number of quarters: ")) * quarter
+    #let's default to 0 incase they just hit enter. 
+    #we have not accounted for user type non numbers
+    #can put try catch around input. 
+    penny_count = float(input("Please enter number of pennies: ") or 0) * penny
+    nickel_count = float(input("Please enter number of nickels: ") or 0) * nickel
+    dime_count = float(input("Please enter number of dimes: ") or 0) * dime
+    quarter_count = float(input("Please enter number of quarters: ") or 0) * quarter
     total = penny_count + nickel_count + dime_count + quarter_count
     change = total - drink['cost']
-    if change > 0:
+    #We need to accept that exact change is legit. 
+    if change >= 0:
         print(f"Your change is ${math.ceil(change)}.")
     else:
         print("You didn't put enough money in.  No coffee for you!")
 
 
-def main():
-    make_coffee = True
-    while make_coffee:
+
+def user_selection():
+        #menu is already a dict, we will use this to our advantage
+        #unless user select off, we return true to get back to this menu
         user_input = input("What would you like to drink? Type 'espresso', 'latte', 'cappuccino'.  Type 'report' "
                            "to check the resources on the machine.  If you are the machine maintainer, type the "
                            "secret word to turn the machine off. ")
-        print(resources)
-        if user_input == 'espresso':
-            drink = dict(MENU['espresso'])
-            #print(drink)
-            resource_sufficient(user_input, drink)
-            process_coins(drink)
-        elif user_input == 'latte':
-            drink = dict(MENU['latte'])
-            #print(drink)
-            resource_sufficient(user_input, drink)
-            process_coins(drink)
-        elif user_input == 'cappuccino':
-            drink = dict(MENU['cappuccino'])
-            resource_sufficient(user_input, drink)
-            process_coins(drink)
+        if user_input in MENU.keys():
+            drink = MENU[user_input]
+            makeable = resource_sufficient(drink['ingredients'])
+            if makeable:
+                process_coins(drink)
+            else:
+                print('Sorry we can`t make that item')
         elif user_input == 'report':
             print(resources)
         elif user_input == 'off':
-            make_coffee = False
+            return False
         else:
             print("Invalid input, no coffee for you!")
 
+        return True
+
+def main():
+    make_coffee = True
+    while make_coffee:
+        make_coffee = user_selection()
 
 if __name__ == '__main__':
     main()
 
-#def espresso():
-#    espresso_water = MENU['espresso']['ingredients']['water']
-#    espresso_coffee = MENU['espresso']['ingredients']['coffee']
-#    espresso_cost = MENU['espresso']['cost']
-#    return espresso_water, espresso_coffee, espresso_cost
-#def latte():
-#    latte_water = MENU['latte']['ingredients']['water']
-#    latte_coffee = MENU['latte']['ingredients']['coffee']
-#    latte_milk = MENU['latte']['ingredients']['milk']
-#    latte_cost = MENU['latte']['cost']
-#    return latte_water, latte_coffee, latte_milk, latte_cost
-#    def cappuccino():
-#    cappuccino_water = MENU['cappuccino']['ingredients']['water']
-#    cappuccino_coffee = MENU['cappuccino']['ingredients']['coffee']
-#    cappuccino_milk = MENU['cappuccino']['ingredients']['milk']
-#    cappuccino_cost = MENU['cappuccino']['cost']
-#    return cappuccino_water, cappuccino_coffee, cappuccino_milk, cappuccino_cost
-#def drink_choice():
-#    drink_choice = input("What would you like to drink? Type 'espresso', 'latte', 'cappuccino'.  Type 'report' to check "
-#        "the resources on the machine.  If you are the machine maintainer, type the secret word to turn "
-#        "the machine off. ")
-#    if drink == 'espresso':
-#        drink = dict(MENU['espresso'])
-#    elif drink == 'latte':
-#        drink = dict(MENU['latte'])
-#    elif drink == 'cappuccino':
-#        drink = dict(MENU['cappuccino'])
-#    elif drink == 'report':
-#        print(resources)
-#    else:
-#        print("Invalid input, no coffee for you!")
-#    return drink
