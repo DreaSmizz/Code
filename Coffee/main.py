@@ -5,6 +5,7 @@
 # TODO: 5. Process coins.
 # TODO: 6. Check transaction successful?
 # TODO: 7. Make Coffee.
+# TODO: 8. Go back and add resource check in 1 month
 import math
 
 MENU = {
