@@ -35,18 +35,22 @@ temps = [
 # Print first set of temps
 #print(temps[0])
 # Print only the first temperature in the first set
-print(temps[0][0])
-print(temps[1][2][1])
+# print(temps[0][0])
+# print(temps[1][2][1])
+#
+# a = 1
+# b = 2
+# c = 3
+#
+# if a > b:
+#     print("a is greater than b")
+#     if b != c:
+#         print("but b is not equal to c")
+#     else:
+#         print("b is equal to c")
+# else:
+#     print("a is less than b")
 
-a = 1
-b = 2
-c = 3
-
-if a > b:
-    print("a is greater than b")
-    if b != c:
-        print("but b is not equal to c")
-    else:
-        print("b is equal to c")
-else:
-    print("a is less than b")
+singular_words = ['student', 'teacher', 'room']
+for word in singular_words:
+    print(word + 's')
