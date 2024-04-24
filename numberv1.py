@@ -23,5 +23,5 @@ def game_play(user_input, computer_number, number_guess):
             user_input = int(input("Guess a number between 1 and 10: "))
     print(f"Out of guesses! The number was {computer_number}.  Try again! ")
 
-
+game_play(user_input, computer_number, number_guess)
 
