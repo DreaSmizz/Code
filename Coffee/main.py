@@ -43,6 +43,9 @@ resources = {
 
 
 def resource_sufficient(user_input, drink):
+    if (drink['ingredients']['water'] > resources['water'] and (drink['ingredients']['coffee'] > resources['coffee'])):
+        print('Not enough resources to make coffee')
+        return resources
     if user_input == 'espresso':
         resources['water'] = resources['water'] - drink['ingredients']['water']
         resources['coffee'] = resources['coffee'] - drink['ingredients']['coffee']
@@ -76,15 +79,12 @@ def main():
         user_input = input("What would you like to drink? Type 'espresso', 'latte', 'cappuccino'.  Type 'report' "
                            "to check the resources on the machine.  If you are the machine maintainer, type the "
                            "secret word to turn the machine off. ")
-        print(resources)
         if user_input == 'espresso':
             drink = dict(MENU['espresso'])
-            #print(drink)
             resource_sufficient(user_input, drink)
             process_coins(drink)
         elif user_input == 'latte':
             drink = dict(MENU['latte'])
-            #print(drink)
             resource_sufficient(user_input, drink)
             process_coins(drink)
         elif user_input == 'cappuccino':
