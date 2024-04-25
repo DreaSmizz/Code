@@ -6,6 +6,7 @@
 # TODO: 6. Check transaction successful?
 # TODO: 7. Make Coffee.
 # TODO: 8. Go back and add resource check in 1 month, fix code so that coin amount in machine prints also.
+# TODO: 9. Build in logic that if user does not put enough money in, machine returns money
 import math
 
 MENU = {
