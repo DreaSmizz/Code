@@ -5,7 +5,7 @@
 # TODO: 5. Process coins.
 # TODO: 6. Check transaction successful?
 # TODO: 7. Make Coffee.
-# TODO: 8. Go back and add resource check in 1 month
+# TODO: 8. Go back and add resource check in 1 month, fix code so that coin amount in machine prints also.
 import math
 
 MENU = {
@@ -92,7 +92,9 @@ def main():
             resource_sufficient(user_input, drink)
             process_coins(drink)
         elif user_input == 'report':
-            print(resources)
+            print(f"Water: {resources['water']}")
+            print(f"Milk: {resources['milk']}")
+            print(f"Coffee: {resources['coffee']}")
         elif user_input == 'off':
             make_coffee = False
         else:
