@@ -38,6 +38,7 @@ resources = {
     "water": 300,
     "milk": 200,
     "coffee": 100,
+    "profit": 0,
 }
 # Create smaller dictionary to read drink choice into
 
@@ -57,6 +58,7 @@ def resource_sufficient(user_input, drink):
 
 
 def process_coins(drink):
+    #profit = resources['profit']
     penny = .01
     nickel = .05
     dime = .10
@@ -66,11 +68,13 @@ def process_coins(drink):
     dime_count = float(input("Please enter number of dimes: ")) * dime
     quarter_count = float(input("Please enter number of quarters: ")) * quarter
     total = penny_count + nickel_count + dime_count + quarter_count
+    profit += total
     change = total - drink['cost']
     if change > 0:
         print(f"Your change is ${math.ceil(change)}.")
     else:
         print("You didn't put enough money in.  No coffee for you!")
+    return profit
 
 
 def main():
