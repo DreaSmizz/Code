@@ -5,5 +5,8 @@ OOP
                 tables_responsible = [4,5,6]
     methods: def take_order(table, order):
              def take_payment(amount)
-
+(object)->car.speed<-(attribute)
 Classes allow you to generate as many objects as you want
+
+Dictionaries are unordered
+List are ordered
