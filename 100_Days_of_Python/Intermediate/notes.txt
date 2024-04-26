@@ -1,0 +1,9 @@
+OOP
+- Objects have things and the things that they can do.
+- waiter:
+  - attributes: is_holding_plate = True
+                tables_responsible = [4,5,6]
+    methods: def take_order(table, order):
+             def take_payment(amount)
+
+Classes allow you to generate as many objects as you want
