@@ -51,10 +51,15 @@ def resource_sufficient(user_input, drink):
     if user_input == 'espresso':
         resources['water'] = resources['water'] - drink['ingredients']['water']
         resources['coffee'] = resources['coffee'] - drink['ingredients']['coffee']
+        if resources['water'] <= 0 or resources['coffee'] <= 0:
+            print("Insufficient resources, contact coffee machine maintainer!")
     else:
-        resources['water'] = resources['water'] - drink['ingredients']['water']
-        resources['milk'] = resources['milk'] - drink['ingredients']['milk']
-        resources['coffee'] = resources['coffee'] - drink['ingredients']['coffee']
+            resources['water'] = resources['water'] - drink['ingredients']['water']
+            resources['milk'] = resources['milk'] - drink['ingredients']['milk']
+            resources['coffee'] = resources['coffee'] - drink['ingredients']['coffee']
+            if resources['water'] <= 0 or resources['milk'] <= 0 or resources['coffee'] <= 0:
+                print("Insufficient resources, contact coffee machine maintainer!")
+                enough_resources = False
     return resources
 
 
