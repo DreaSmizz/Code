@@ -10,3 +10,13 @@ Classes allow you to generate as many objects as you want
 
 Dictionaries are unordered
 List are ordered
+
+attribute is a variable that is associated with an object
+
+To create constructor you initialize a special function called the init function
+def __init__(self):
+    #initialize attributes
+
+Init is called everytime you create a new object from the class
+methods are things that the object does
+will never see self when creating objects but will see when creating classes
