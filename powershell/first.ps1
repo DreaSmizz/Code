@@ -15,4 +15,25 @@
 Get-CimInstance -ClassName Win32_logcialdisk -Filter "DeviceID='C:'" -ComputerName inhyd-dc01 | Select-Object @{name="ComputerName";e={$_.Pscomputername}}, 
 @{name="FreeSpaceinGB";e={$_.FreeSpace /1gb -as [int]}} 
 
+Get-CimInstance -ComputerName inhyd-dc01 -ClassName Win32_logcialdisk -Filter "Device='C'" |
+ Select-Object @{name="ComputerName";e={$_.Pscomputername}} ,
+  @{Name="FreeSpaceinGB";E={$_.FreeSpace /1gb -as [int]}}
+
 # Intermediate Script - only works on windows
+<#
+.SYNOPSIS
+This is for my computers disk info
+.DESCRIPTION
+This can be used for getting disk info on Windows machine
+.PARAMETER MachineName
+.EXAMPLE 
+to connect and give remote Computer Disk Free Space report
+Disk-info -MachineName Localhost
+#>
+param (
+$MachineName = 'inhyd-dc01'
+)
+
+Get-CimInstance -ComputerName $MachineName -ClassName Win32_logcialdisk -Filter "Device='C'" |
+ Select-Object @{name="ComputerName";e={$_.Pscomputername}} ,
+  @{Name="FreeSpaceinGB";E={$_.FreeSpace /1gb -as [int]}}
