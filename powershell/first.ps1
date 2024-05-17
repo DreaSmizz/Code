@@ -8,4 +8,11 @@
 
 # First Basic Script
 
-Get-CimInstance -ClassName Win32_logcialdisk -Filter "DeviceID='C:'"
+# This works on Windows only, gets output for C drive, space, etc for remote computer
+
+# Below is simple script, one after is custom
+# Get-CimInstance -ClassName Win32_logcialdisk - Filter "DeviceID='C'" -ComputerName inhyd-dc01  | Select-Object Pscomputername, FreeSpace
+Get-CimInstance -ClassName Win32_logcialdisk -Filter "DeviceID='C:'" -ComputerName inhyd-dc01 | Select-Object @{name="ComputerName";e={$_.Pscomputername}}, 
+@{name="FreeSpaceinGB";e={$_.FreeSpace /1gb -as [int]}} 
+
+# Intermediate Script - only works on windows
