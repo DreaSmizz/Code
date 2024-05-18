@@ -42,7 +42,7 @@ Get-CimInstance -ComputerName $MachineName -ClassName Win32_logcialdisk -Filter 
 #Get content of computers
 $computers = Get-Content "C:\computers.txt"
 
-$session = New-PSSsession -ComputerName $computers
+#$session = New-PSSsession -ComputerName $computers
 
 ForEach($line in $computers)
 {
