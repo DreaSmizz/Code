@@ -37,3 +37,14 @@ $MachineName = 'inhyd-dc01'
 Get-CimInstance -ComputerName $MachineName -ClassName Win32_logcialdisk -Filter "Device='C'" |
  Select-Object @{name="ComputerName";e={$_.Pscomputername}} ,
   @{Name="FreeSpaceinGB";E={$_.FreeSpace /1gb -as [int]}}
+
+
+#Get content of computers
+$computers = Get-Content "C:\computers.txt"
+
+$session = New-PSSsession -ComputerName $computers
+
+ForEach($line in $computers)
+{
+  Invoke-Command -ComputerName $line -ScriptBlock{Get-Service -Name bits}  
+}
