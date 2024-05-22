@@ -48,3 +48,28 @@ ForEach($line in $computers)
 {
   Invoke-Command -ComputerName $line -ScriptBlock{Get-Service -Name bits}  
 }
+
+# Managing errors by using Try/Catch/Finally
+# Try encapsulates statements - try must have at least one catch or finally block
+<#
+Try {
+    Statement. For example, call a command.
+    Another statement. For example, assign a variable.
+}
+Try {
+   # Do something with a file.
+} Catch [System.IO.IOException] {
+   Write-Host "Something went wrong"
+}  Catch {
+   # Catch all. It's not an IOException but something else.
+}
+Try {
+   # Do something with a file.
+} Catch [System.IO.IOException] {
+   Write-Host "Something went wrong"
+}  Catch {
+   # Catch all. It's not an IOException but something else.
+} Finally {
+   # Clean up resources.
+}
+#>
