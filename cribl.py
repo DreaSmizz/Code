@@ -10,30 +10,31 @@
 
 # Required packages for script to work
 import json
-import csv
 import requests
 import pandas as pd
-from splunk_data_sender import SplunkSender
 
 
-
-#splunk = SplunkSender(**splunk_conf)
 
 # Send requests for CSV file
 stock = pd.read_csv("https://raw.githubusercontent.com/datasets/s-and-p-500-companies/main/data/constituents.csv")
 stocks_json = stock.to_json(orient='records')
 # My lab splunk 
+session = requests.Session()
 url = 'http://localhost:8000'
 data = stocks_json
-splunk_headers = {'Authorization': 'Splunk 424e510f-631d-4da3-b0d6-bbcdc15fb91a','Content-Type': 'application/json'}
-response = requests.post(url, headers=splunk_headers, data=json.dumps(data), verify=False )
+splunk_headers = {'Authorization': 'Splunk ffce3d95-2625-4e01-ab6a-f153fb9aae8c','Content-Type': 'application/json'}
+response = requests.post(url, headers=splunk_headers, json=json.dumps(data), verify=False )
 print(response.status_code)
+
+
+
+
+
+
+#import csv
 #print(response.content)
-
-
-
-
-
+#splunk = SplunkSender(**splunk_conf)
+#from splunk_data_sender import SplunkSender
 #splunk_conf = {
 #    'endpoint':'http://localhost',
 #    'port':'8000',
