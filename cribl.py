@@ -17,9 +17,9 @@ import pandas as pd
 
 # Send requests for CSV file
 stock = pd.read_csv("https://raw.githubusercontent.com/datasets/s-and-p-500-companies/main/data/constituents.csv")
+#Convert to json format for ingestion
 stocks_json = stock.to_json(orient='records')
 # My lab splunk 
-session = requests.Session()
 url = 'http://localhost:8000'
 data = stocks_json
 splunk_headers = {'Authorization': 'Splunk ffce3d95-2625-4e01-ab6a-f153fb9aae8c','Content-Type': 'application/json'}
