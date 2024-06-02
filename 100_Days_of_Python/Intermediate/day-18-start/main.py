@@ -1,20 +1,32 @@
 from turtle import Turtle, Screen
 
 
-timmy_the_turtle = Turtle()
-timmy_the_turtle.shape("turtle")
-timmy_the_turtle.color('green')
+t_turtle = Turtle()
+t_turtle.shape("turtle")
+t_turtle.color('green')
 
+# Draw a square 
 #for _ in range(4):
-#    timmy_the_turtle.forward(100)
-#    timmy_the_turtle.right(90)
+#    t_turtle.forward(100)
+#    t_turtle.right(90)
 
-for _ in range(15):
-    timmy_the_turtle.forward(10)
-    timmy_the_turtle.pencolor("black")
-    timmy_the_turtle.forward(10)
-    timmy_the_turtle.pencolor("white")
+# Draw a dashed line
+#for _ in range(15):
+#    t_turtle.forward(10)
+#    t_turtle.pencolor("black")
+#    t_turtle.forward(10)
+#    t_turtle.pencolor("white")
 
+# Draw a different shape
+def draw_shape(num_sides):
+    angle = 360 / num_sides
+    for _ in range(num_sides):
+        t_turtle.forward(100)
+        t_turtle.right(angle)
+
+
+#for shape_size in range(3, 11):
+#    draw_shape(shape_size)
 
 
 screen = Screen()
